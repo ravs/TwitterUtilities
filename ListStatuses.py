@@ -15,14 +15,12 @@ auth.set_access_token(RavsKeys.access_token, RavsKeys.access_token_secret)
 api = api.API(auth)
 
 # Write tweets in file
-#conf_training_set = open("conf_training_set.txt", "w")
+conf_training_set = open("conf_training_set.txt", "w")
 list_member = open("list_member.txt","w")
 
 # Method to stop execution and enter in sleep mode for 15Min span
 def standby():
 	print "Doh!! Rate limit exceeded, taking a nap now!!"
-	#dataset.write("\n Going to sleep \n")
-	#edgelist.write("Going to sleep\n")
 	time.sleep(910)
 	print "Sleeping is just waste of time, resume execution"
 
@@ -48,7 +46,7 @@ def get_list_timeline():
 			for status in page:
 				print status.text
 				# Since tweets itself have new line, qoute each tweet.
-				# This might be help full in cleaning the training set.
+				# This might be helpful in cleaning the training set.
 				conf_training_set.write("\"" + status.text.encode('utf-8') + "\"" + "\n")
 			if remaining_rate_limit() == 0:
 				standby()
